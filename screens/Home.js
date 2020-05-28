@@ -20,7 +20,7 @@ export function Home(props) {
 
     const renderList = ((item) => {
         return (
-            <Card style={styles.mycard} key={item.id}>
+            <Card style={styles.mycard} key={item.id} onPress={() => props.navigation.navigate("Profile")} >
                 <View style={styles.cardView}>
                     <Image 
                     style={{width: 60, height: 60, borderRadius: 50/2}}
@@ -36,7 +36,7 @@ export function Home(props) {
     })
 
     return (
-        <View>
+        <View style={{flex: 1}}>
             <FlatList
                 data={data}
                 renderItem={({item})=> {
@@ -44,7 +44,7 @@ export function Home(props) {
                     renderList(item)
                    ) 
                 }}
-                keyExractor={item =>`${item.id}`}
+                keyExtractor={item =>`${item.id}`}
             />
             <FAB 
                 onPress={() => props.navigation.navigate("Create")}
@@ -52,7 +52,6 @@ export function Home(props) {
                 small={false}
                 icon="plus"
                 theme={{colors: {accent: "blue"} }}
-                onPress={() => console.log("pressed")}
             />
          </View>
     )
@@ -61,8 +60,7 @@ export function Home(props) {
 
 const styles = StyleSheet.create({
     mycard: {
-      margin: 5,
-      borderColor: "black"
+      margin: 5
     },
     cardView: {
         flexDirection: "row",
