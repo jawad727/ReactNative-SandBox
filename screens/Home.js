@@ -6,24 +6,24 @@ import { FAB } from "react-native-paper"
 export function Home(props) {
 
     const data = [
-        {id: 1, name: "john", position: "web dev"},
-        {id: 2, name: "jay", position: "cashier"},
-        {id: 3, name: "jerry", position: "photo specialist"},
-        {id: 4, name: "jose", position: "android developer"},
-        {id: 5, name: "john", position: "web dev"},
-        {id: 6, name: "jay", position: "cashier"},
-        {id: 7, name: "jerry", position: "photo specialist"},
-        {id: 8, name: "jose", position: "android developer"},
-        {id: 9, name: "jerry", position: "photo specialist"},
-        {id: 10, name: "jose", position: "android developer"}
+        {id: 1, name: "john", position: "web dev", email: `random@gmail.com`, salary: "$50,000", phone: "(503)-937-6253", picture: "https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-512.png"},
+        {id: 2, name: "jay", position: "cashier", email: `random@gmail.com`, salary: "$25,000", phone: "(503)-534-6845", picture: "https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-512.png"},
+        {id: 3, name: "jerry", position: "photo specialist", email: `random@gmail.com`, salary: "$30,000", phone: "(503)-293-6038", picture: "https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-512.png"},
+        {id: 4, name: "jose", position: "android developer", email: `random@gmail.com`, salary: "$80,000", phone: "(503)-222-2123", picture: "https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-512.png"},
+        // {id: 5, name: "john", position: "web dev"},
+        // {id: 6, name: "jay", position: "cashier"},
+        // {id: 7, name: "jerry", position: "photo specialist"},
+        // {id: 8, name: "jose", position: "android developer"},
+        // {id: 9, name: "jerry", position: "photo specialist"},
+        // {id: 10, name: "jose", position: "android developer"}
     ]
 
     const renderList = ((item) => {
         return (
-            <Card style={styles.mycard} key={item.id} onPress={() => props.navigation.navigate("Profile")} >
+            <Card style={styles.mycard} key={item.id} onPress={() => props.navigation.navigate("Profile", {item: item})} >
                 <View style={styles.cardView}>
                     <Image 
-                    style={{width: 60, height: 60, borderRadius: 50/2}}
+                    style={{width: 60, height: 60, borderRadius: 30}}
                     source={{uri: "https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-512.png"}}
                     />
                     <View style={{marginLeft: 10}}>
