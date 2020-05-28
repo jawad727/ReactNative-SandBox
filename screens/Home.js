@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, FlatList } from "react-native"
 import { Card } from "react-native-paper"
 import { FAB } from "react-native-paper"
 
-export function Home() {
+export function Home(props) {
 
     const data = [
         {id: 1, name: "john", position: "web dev"},
@@ -47,11 +47,12 @@ export function Home() {
                 keyExractor={item =>`${item.id}`}
             />
             <FAB 
-        style={styles.fab}
-        small={false}
-        icon="plus"
-        theme={{colors: {accent: "blue"} }}
-        onPress={() => console.log("pressed")}
+                onPress={() => props.navigation.navigate("Create")}
+                style={styles.fab}
+                small={false}
+                icon="plus"
+                theme={{colors: {accent: "blue"} }}
+                onPress={() => console.log("pressed")}
             />
          </View>
     )
