@@ -1,7 +1,9 @@
 import React from "react"
-import { StyleSheet, Text, View, Image, FlatList, Modal } from "react-native"
+import { StyleSheet, Text, View, Image, FlatList, Modal, ImagePickerIOS, Alert } from "react-native"
 import { TextInput, Button } from "react-native-paper"
 import { useState } from "react"
+import * as Permissions from "expo-permissions"
+import * as ImagePicker from "expo-image-picker"
 
 export const CreateEmployee = () => {
     const [name, setName] = useState("")
@@ -10,6 +12,36 @@ export const CreateEmployee = () => {
     const [salary, setSalary] = useState("")
     const [picture, setPicture] = useState("")
     const [modal, setModal] = useState(false)
+
+    const pickFromGallery = async () => {
+        const {granted} = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+        if (granted) {
+            let data = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1,1],
+                quality: 0.5
+            })
+            console.log(data)
+        } else {
+            Alert.alert("you need to give permission for camera to work")
+        }
+    }
+
+    const pickFromCamera = async () => {
+        const {granted} = await Permissions.askAsync(Permissions.CAMERA)
+        if (granted) {
+            let data = await ImagePicker.launchCameraAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1,1],
+                quality: 0.5
+            })
+            console.log(data)
+        } else {
+            Alert.alert("you need to give permission for camera to work")
+        }
+    }
 
     return (
         <View style={styles.root}>
@@ -72,10 +104,10 @@ export const CreateEmployee = () => {
             >
                 <View style={styles.modalView}>
                     <View style={styles.modalButtonView}>
-                        <Button icon="camera" mode="contained" theme={theme} onPress={() => console.log("camera")}>
+                        <Button icon="camera" mode="contained" theme={theme} onPress={() => pickFromCamera()}>
                             camera
                         </Button>
-                        <Button icon="image-area" mode="contained" theme={theme} onPress={() => console.log("gallery")}>
+                        <Button icon="image-area" mode="contained" theme={theme} onPress={() => pickFromGallery()}>
                             gallery
                         </Button>
                     </View>
